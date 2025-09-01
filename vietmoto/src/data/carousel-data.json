@@ -1,0 +1,139 @@
+{
+  "carousels": [
+    {
+      "day": 1,
+      "listImages": [
+        "/bikes/day_1_parking_peek.jpg",
+        "/bikes/day_1_flamingo_travel.jpg",
+        "/bikes/day_1_pit_stop.jpg",
+        "/bikes/day_1_walking_street.jpg",
+        "/bikes/day_1_temple_break.jpg"
+      ],
+      "distance": "230 km – 5 hours",
+      "route": "Ho Chi Minh → Phan Thiet (quick stop at Vung Tau)",
+      "map": "https://maps.app.goo.gl/2Ro5vexJRaacGzbY8",
+      "blip": "Getting used to the traffic wasn't too bad and even got a chance to resolve an odd noise on the bike at a roadside shop. Couldn't have picked a better place to reset than a pit stop at Thuong Chieu Zen Monastery and Ham Thuan Nam."
+    },
+    {
+      "day": 2,
+      "listImages": [
+        "/bikes/day_2_da_lat_night_market.jpg",
+        "/bikes/day_2_da_lat_horse.jpg",
+        "/bikes/day_2_da_lat.jpg",
+        "/bikes/day_2_roadside_repairs.jpg"
+      ],
+      "distance": "174 km - 4 hours",
+      "route": "Phan Thiet → Dalat",
+      "map": "https://maps.app.goo.gl/HJ3pdHiVDW1wXjRX7",
+      "blip": "High up in the mountains DaLat has a unique micro climate and is cool enough to make their own wine"
+    },
+    {
+      "day": 3,
+      "listImages": [
+        "/bikes/day_3_beach.jpg",
+        "/bikes/day_3_road.jpg",
+        "/bikes/day_3_trang_river.jpg",
+        "/bikes/day_3_waterfalls.jpg"
+      ],
+      "distance": "135 km - 3 hours",
+      "route": "Dalat → Nha Trang",
+      "map": "https://maps.app.goo.gl/6t8NZ9zwvhNFQgXf9",
+      "blip": "Some of the best curvy and well maintained roads through small and large beach towns."
+    },
+    {
+      "day": 4,
+      "listImages": [
+        "/bikes/day_4_fishing_boats.jpg",
+        "/bikes/day_4_in_mud_bath.jpg",
+        "/bikes/day_4_mud_bath_prices.jpg"
+      ],
+      "distance": "236 km - 5 hours",
+      "route": "Nha Trang → Quy Nhon",
+      "map": "https://maps.app.goo.gl/UBeKFe8zcANqis758",
+      "blip": "Roads get dustier in-land mud baths are a great way to prepare for the next stretch"
+    },
+    {
+      "day": 5,
+      "listImages": [
+        "/bikes/day_5_budda.jpg",
+        "/bikes/day_5_rice_fields.jpg",
+        "/bikes/day_5_rice_road.jpg",
+        "/bikes/day_5_rice_snacks.jpg"
+      ],
+      "distance": "291 km - 5 hours 10 minutes",
+      "route": "Quy Nhon → Hoi An",
+      "map": "https://maps.app.goo.gl/shjVcRw3CMRC9dJ99",
+      "blip": "Iconic rice patties and the rice roadside snacks are amazing"
+    },
+    {
+      "day": 6,
+      "listImages": [
+        "/bikes/day_6_hoi_an_boats.jpg",
+        "/bikes/day_6_hoi_an_lanterns.jpg",
+        "/bikes/day_6_hoi_an_tune_up.jpg"
+      ],
+      "distance": "154 km - 4 hours",
+      "route": "Hoi An → Hue (pit stop at Da Nang for sightseeing)",
+      "map": "https://maps.app.goo.gl/cKdzVgiwB2KdQgL4A",
+      "blip": "Hoi An is a charming town on the river with French, Chinese and Japanese architecture. Colorful lantern boat ride was a magical experience."
+    },
+    {
+      "day": 7,
+      "listImages": [
+        "/bikes/day_7_snacks.jpg",
+        "/bikes/day_7_art.jpg",
+        "/bikes/day_7_royal_palace.jpg",
+        "/bikes/day_7_palace_dress.jpg",
+        "/bikes/day_7_martini.jpg"
+      ],
+      "distance": "231 km - 5 hours",
+      "route": "Hue → Phong Nha cave",
+      "map": "https://maps.app.goo.gl/agQoGMqnkLTtoJLRA",
+      "blip": "Hue has a rich cultural heritage with unqie cousine and beautiful palaces"
+    },
+    {
+      "day": 8,
+      "listImages": [
+        "/bikes/day_8_pool.jpg",
+        "/bikes/day_8_hue_cow.jpg",
+        "/bikes/day_8_river.jpg",
+        "/bikes/day_8_phong_nha_cave.jpg",
+        "/bikes/day_8_cave_landing.jpg",
+        "/bikes/day_8_cave_walk.jpg"
+      ],
+      "distance": "182 km - 4 hours",
+      "route": "Phong Nha cave → Pho Chau",
+      "map": "https://maps.app.goo.gl/phTGAR3ZAtGCRKbAA",
+      "blip": "Waking up for the boat early is the best way to take in the scenery in peace and quiet"
+    },
+    {
+      "day": 9,
+      "listImages": [
+        "/bikes/day_9_parking.jpg",
+        "/bikes/day_9_lanterns.jpg",
+        "/bikes/day_9_fish.jpg",
+        "/bikes/day_9_chairs.jpg"
+      ],
+      "distance": "316 km - 6 hours",
+      "route": "Pho Chau → Cuc Phuong National Park",
+      "map": "https://maps.app.goo.gl/bEXWDHb6hBWrfjLo7",
+      "blip": "Roads away from the coast are much dustier and shortcuts are not always paved. Lots of logging trucks but we watched a beautiful thunderstorm over the national park."
+    },
+    {
+      "day": 10,
+      "listImages": [
+        "/bikes/day_10_buncha.jpg",
+        "/bikes/day_10_jazz_club.jpg",
+        "/bikes/day_10_pandan.jpg",
+        "/bikes/day_10_cars.jpg",
+        "/bikes/day_10_cocktail.jpg",
+        "/bikes/day_10_singers.jpg",
+        "/bikes/day_10_theater.jpg"
+      ],
+      "distance": "139 km - 3 hours",
+      "route": "Cuc Phuong → Hanoi",
+      "map": "https://maps.app.goo.gl/Y1eBL6uDnZAvkahk9",
+      "blip": "Great cocktails, cousine, art and music"
+    }
+  ]
+}
