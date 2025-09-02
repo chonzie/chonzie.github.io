@@ -10,7 +10,7 @@
     "export": "next build && next export",
     "deploy": "gh-pages -d out -t"
   },
-  "homepage": "https://chonzie.github.io/vietmoto",
+  "homepage": "https://chonzie.github.io",
   "dependencies": {
     "next": "15.4.6",
     "react": "19.1.0",

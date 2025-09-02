@@ -3,11 +3,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/vietmoto' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/vietmoto/' : '',
+  basePath: '',
+  assetPrefix: '/',
   images: {
     unoptimized: true,
   },
+  // Optional: Add this if you're using client-side routing
+  // trailingSlash: true,
 };
 
 module.exports = nextConfig;
