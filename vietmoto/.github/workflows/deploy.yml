@@ -9,9 +9,18 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  pull-requests: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
+    environment: 
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,7 +38,12 @@ jobs:
       - name: Build
         run: |
           npm run build
+          # Create .nojekyll to bypass Jekyll processing
           touch out/.nojekyll
+          # Add a simple index.html if it doesn't exist
+          if [ ! -f out/index.html ]; then
+            echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/vietmoto" /></head></html>' > out/index.html
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -38,14 +52,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './out'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build-and-deploy
-    steps:
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
