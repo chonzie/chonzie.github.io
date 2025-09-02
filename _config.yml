@@ -1,17 +1,3 @@
 theme: jekyll-theme-minimal
 title: Ho Chi Minh trail
 description: Vietnam South to North in 10 days
-
-# Serve the Next.js static build from the root URL
-baseurl: "/vietmoto/out"
-url: ""
-
-# Copy the out directory to _site
-include:
-  - vietmoto/out
-
-defaults:
-  - scope:
-      path: ""
-    values:
-      permalink: /index.html
