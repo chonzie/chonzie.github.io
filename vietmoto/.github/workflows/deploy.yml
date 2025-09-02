@@ -33,20 +33,29 @@ jobs:
 
       - name: Debug Info
         run: |
-          echo "Node version:"
-          node --version
-          echo "NPM version:"
-          npm --version
-          echo "Current directory:"
-          pwd
+          echo "Node version:
+          $(node --version)"
+          echo "NPM version:
+          $(npm --version)"
+          echo "Current directory:
+          $(pwd)"
+          echo "Repository contents:"
           ls -la
+          echo "vietmoto directory contents:"
+          ls -la vietmoto/ || echo "vietmoto directory not found"
 
       - name: Install dependencies
-        run: npm ci --prefer-offline
+        run: |
+          # Explicitly use npm
+          cd vietmoto || { echo "vietmoto directory not found"; exit 1; }
+          npm ci --prefer-offline
 
       - name: Build
         run: |
+          cd vietmoto
           npm run build
+          # Create out directory if it doesn't exist
+          mkdir -p out
           # Create .nojekyll to bypass Jekyll processing
           touch out/.nojekyll
           # Add a simple index.html if it doesn't exist
