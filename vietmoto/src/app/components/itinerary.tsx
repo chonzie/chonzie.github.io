@@ -1,8 +1,8 @@
 export default function Itinerary(){
     return (
-        <table className="w-full border-collapse border border-gray-300">
+        <table className="w-full border-collapse border border-gray-100">
             <thead>
-                <tr className="bg-gray-800">
+                <tr className="bg-gray-300">
                     <th className="border border-gray-300 p-2 text-left">Day/Route</th>
                     <th className="border border-gray-300 p-2 text-left">Distance/Time</th>
                     <th className="border border-gray-300 p-2 text-left">Map Link</th>

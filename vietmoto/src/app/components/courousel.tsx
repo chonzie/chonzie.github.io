@@ -1,150 +1,134 @@
-'use client'
+'use client';
 
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
-import DayInfo from "./DayInfo";
 
-export default function Courousel({ day, listImages, distance, route, map, blip }: { day: number; listImages: string[]; distance: string, route: string; map: string;blip: string }) {
+type CarouselProps = {
+  day: number;
+  listImages: string[];
+  distance: string;
+  route: string;
+  map: string;
+  blip: string;
+};
+
+export default function Courousel({ 
+  day, 
+  listImages = [], 
+  distance, 
+  route, 
+  map, 
+  blip 
+}: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const validImages = Array.isArray(listImages) ? listImages.filter(Boolean) : [];
 
-  const handleTransition = useCallback((newIndex: number) => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex(newIndex);
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 250);
-  }, [isTransitioning]);
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % validImages.length);
+  }, [validImages.length]);
 
-  // Auto-advance carousel every 5 seconds
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + validImages.length) % validImages.length);
+  }, [validImages.length]);
+
+  // Auto-scroll effect
   useEffect(() => {
-    if (!isAutoPlaying || listImages.length <= 1) return;
-
+    if (validImages.length <= 1 || isPaused) return;
+    
     const interval = setInterval(() => {
-      if (!isTransitioning) {
-        const nextIndex = (currentIndex + 1) % listImages.length;
-        handleTransition(nextIndex);
-      }
-    }, 5000);
+      goToNext();
+    }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, listImages.length, currentIndex, isTransitioning, handleTransition]);
-
-  const goToNext = () => {
-    const nextIndex = (currentIndex + 1) % listImages.length;
-    handleTransition(nextIndex);
-  };
-
-  const goToPrevious = () => {
-    const prevIndex = currentIndex === 0 ? listImages.length - 1 : currentIndex - 1;
-    handleTransition(prevIndex);
-  };
-
-  const goToSlide = (index: number) => {
-    if (index !== currentIndex) {
-      handleTransition(index);
-    }
-  };
-
-  const toggleAutoPlay = () => {
-    setIsAutoPlaying(!isAutoPlaying);
-  };
-
-  if (listImages.length === 0) {
+  }, [validImages.length, isPaused, goToNext]);
+  
+  if (validImages.length === 0) {
     return (
-      <div className="flex justify-center items-center h-64 w-full bg-gray-100 rounded-lg">
-        <p className="text-gray-500 text-lg">No images available for Day {day}</p>
+      <div className="flex flex-col items-center justify-center p-8 bg-gray-100 rounded-lg">
+        <p className="text-gray-500 text-lg mb-4">No images available for Day {day}</p>
+        <div className="text-sm text-gray-600">
+          <p>Route: {route}</p>
+          <p>Distance: {distance}</p>
+        </div>
       </div>
     );
   }
 
+  const currentImage = validImages[currentIndex % validImages.length];
+  
   return (
-    <div className="w-full bg-gray grid grid-rows-[1fr_auto] min-h-[80vh]">
-      {/* Main Content Grid Area */}
-      <div className="grid grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr] gap-0 h-full min-h-[70vh]">
-        
-        {/* Left Panel - Information */}
-        <DayInfo 
-          day={day}
-          distance={distance}
-          route={route}
-          map={map}
-          blip={blip}
-        />
-
-        {/* Right Panel - Image */}
-        <div className="relative bg-gray-900">
+    <div 
+      className="w-full bg-white rounded-lg shadow-lg overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+    >
+      {/* Image Display */}
+      <div className="relative aspect-video bg-gray-200">
+        {currentImage && (
           <Image
-            src={listImages[currentIndex]}
+            src={currentImage.startsWith('/') ? currentImage : `/${currentImage}`}
             alt={`Day ${day} - Image ${currentIndex + 1}`}
             fill
-            className={`object-cover transition-opacity duration-650 ease-in-out ${
-              isTransitioning ? 'opacity-0' : 'opacity-100'
-            }`}
-            style={{
-              transitionTimingFunction: 'cubic-bezier(0.2, 0, 0.3, .9)'
-            }}
+            className="object-cover"
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 75vw"
+            sizes="(max-width: 768px) 100vw, 80vw"
           />
-          
-          {/* Navigation Arrows */}
-          {listImages.length > 1 && (
-            <>
-              <button
-                onClick={goToPrevious}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-200"
-                aria-label="Previous image"
-              >
-                ←
-              </button>
-              <button
-                onClick={goToNext}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-200"
-                aria-label="Next image"
-              >
-                →
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Bottom Controls Grid Area */}
-      <div className="bg-black p-3 sm:p-4">
-        {listImages.length > 1 && (
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
-            {/* Auto-play toggle */}
+        )}
+        
+        {/* Navigation Arrows */}
+        {validImages.length > 1 && (
+          <>
             <button
-              onClick={toggleAutoPlay}
-              className="text-white/70 hover:text-white text-sm transition-colors"
-              aria-label={isAutoPlaying ? "Pause slideshow" : "Play slideshow"}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrev();
+              }}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              aria-label="Previous image"
             >
-              {isAutoPlaying ? "⏸️" : "▶️"}
+              ←
             </button>
-            
-            {/* Dot Navigation */}
-            <div className="flex justify-center space-x-2">
-              {listImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? "bg-white scale-125"
-                      : "bg-white/50 hover:bg-white/70"
-                  }`}
-                  aria-label={`Go to image ${index + 1}`}
-                />
-              ))}
-            </div>
-            
-            {/* Image counter */}
-            <div className="text-white/70 text-sm">
-              {currentIndex + 1} / {listImages.length}
-            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              aria-label="Next image"
+            >
+              →
+            </button>
+          </>
+        )}
+      </div>
+      
+      {/* Info Section */}
+      <div className="p-4">
+        <h3 className="text-lg font-semibold">Day {day}: {route}</h3>
+        <p className="text-gray-600 text-sm">Distance: {distance}</p>
+        <p className="text-gray-700 mt-2">{blip}</p>
+        
+        {/* Dots Navigation */}
+        {validImages.length > 1 && (
+          <div className="flex justify-center gap-2 mt-4">
+            {validImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentIndex % validImages.length
+                    ? 'bg-blue-600 w-6'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         )}
       </div>

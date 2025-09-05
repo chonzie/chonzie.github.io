@@ -2,14 +2,33 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Static export configuration
   output: 'export',
-  basePath: '',
-  assetPrefix: '/',
+  distDir: 'out',
+  
+  // Image optimization
   images: {
     unoptimized: true,
+    domains: ['localhost', 'chonzie.github.io']
   },
-  // Optional: Add this if you're using client-side routing
-  // trailingSlash: true,
+  
+  // Static export settings
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+
+  // Disable features that cause issues with static export
+  experimental: {
+    optimizeCss: false,
+  },
+  
+  // Performance optimizations
+  staticPageGenerationTimeout: 1000,
+  generateEtags: false,
+  poweredByHeader: false,
+  compress: false,
+  
+  // Disable React Strict Mode to prevent double rendering in development
+  reactStrictMode: false,
 };
 
-module.exports = nextConfig;
+export default nextConfig;
