@@ -1,6 +1,5 @@
 'use client';
 
-import styles from "./body.module.css";
 import List from "../components/list";
 import Itinerary from "../components/itinerary";
 import Courousel from "../components/courousel";
@@ -61,7 +60,7 @@ export default function Body() {
                             "Apply for visa a couple of months in advance",
                             "Email the Motorbike Tour Company in advance",
                             "Download Vietnam Google Maps Offline",
-                            "Download ?? App for Hotels",
+                            "Download Agoda App for Hotels",
                             "Get Vietnam local SIM, it will work better in remote areas",
                             "Pack everything into a GiantLoop Saddlebag",
                             "Get malaria tablets and vaccines up to date"
@@ -70,9 +69,11 @@ export default function Body() {
                     <List
                         title="Don't"
                         listItems={[
-                            "Get a Vietnam visa online if your name has non-alphanumeric characters. Go through a travel agent instead",
+                            "If your name has non-alphanumeric characters. Go through a travel agent instead of online application",
+                            "Expect 10 days is enough to cover the trail with leisure",
                             "Expect your glasses to survive the dusty roads",
-                            "Expect 10 days is enough to cover the trail with leisure"
+                            "Drink the tap water",
+                            "Google maps is not always accurate, be flexible it will work out"
                         ]}
                     />
                 </div>
